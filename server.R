@@ -6,8 +6,11 @@
 #
 #    https://shiny.posit.co/
 #
-
+## USE JUST FOR DATA MANIPULATION (Web/dashboard)
 library(shiny)
+library(survminer)
+library(ggsurvfit)
+library(jskm)
 
 # Define server logic required to draw a histogram
 function(input, output, session) {
