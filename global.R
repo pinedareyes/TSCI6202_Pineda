@@ -80,4 +80,28 @@ ggplot(demographics, aes(x=RACE, y=timetoevent, fill = RACE, color=GENDER)) + #a
   geom_boxplot(outliers = FALSE, notch = TRUE, color="darkblue")+
   geom_jitter(width = 0.1)+
   geom_violin(color="blue", alpha=0.5)
-             
+
+ggplot(demographics,aes(x=RACE, y=timetoevent, fill=RACE, color=GENDER)) +
+  geom_boxplot(outliers=FALSE, notch=TRUE, color="blue", fill='pink') +
+  geom_jitter(aes(color=as.numeric(INCOME)), width=0.1) +
+  geom_violin (color="blue", alpha=0.5)
+
+ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
+  geom_boxplot(outliers=FALSE, notch=FALSE, color="black", fill='white') +
+  geom_jitter(aes(color=as.numeric(timetoevent)), width=0.1) +
+  scale_color_continuous(palette = c("black","white"),
+                         aesthetics = "color",
+                         guide = "colourbar",
+                         na.value = "red",
+                         type = getOption("ggplot2.continuous.colour"))
+
+#GIOM specify data set 
+ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
+  geom_boxplot(outliers=FALSE, notch=FALSE, color="black", fill='white') +
+  geom_jitter(aes(color=as.numeric(timetoevent)), width=0.25, data = subset(demographics, STATE == "California")) +
+  geom_jitter(color="lightpink", width=0.25, data = subset(demographics, STATE != "California")) +
+  scale_color_continuous(palette = c("darkblue","lightgray"),
+                         aesthetics = "color",
+                         guide = "colourbar",
+                         na.value = "red",
+                         type = getOption("ggplot2.continuous.colour"))
