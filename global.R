@@ -104,4 +104,14 @@ ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
                          aesthetics = "color",
                          guide = "colourbar",
                          na.value = "red",
-                         type = getOption("ggplot2.continuous.colour"))
+                         type = getOption("ggplot2.continuous.colour"))+
+  geom_jitter(color="#C11C84", width=0.1, data=subset(demographics,ETHNICITY=="hispanic"), shape="\u2665", size=3)+ #shape will change the shape of the point in the graph
+  facet_wrap("MARITAL")
+
+#example(points) This will show you the examples for point in a graph
+
+ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
+  geom_boxplot(outliers=FALSE, notch=FALSE, color="black", fill='white') +
+  geom_jitter(aes(color=as.numeric(timetoevent)), width=0.25) +
+  facet_grid(rows= vars(MARITAL), cols=vars(STATE))
+
