@@ -113,5 +113,5 @@ ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
 ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
   geom_boxplot(outliers=FALSE, notch=FALSE, color="black", fill='white') +
   geom_jitter(aes(color=as.numeric(timetoevent)), width=0.25) +
-  facet_grid(rows= vars(MARITAL), cols=vars(STATE))
+  facet_grid(rows= vars(MARITAL), cols=vars(STATE)) #this command cares about your data, which is not the same with boxplot & jitter
 
