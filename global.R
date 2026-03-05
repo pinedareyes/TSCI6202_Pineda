@@ -4,6 +4,7 @@ library(dplyr)
 library(survminer)
 library(ggsurvfit)
 library(jskm)
+library(superheat) #heatmap package
 
 options(datatable.na.strings=c('NULL',''));
 demographics <- import("output/csv/patients.csv") %>% mutate(BIRTHDATE=as.Date(BIRTHDATE), DEATHDATE=as.Date(DEATHDATE), 
@@ -115,3 +116,37 @@ ggplot(demographics, aes(x=RACE, y=timetoevent, color=GENDER)) +
   geom_jitter(aes(color=as.numeric(timetoevent)), width=0.25) +
   facet_grid(rows= vars(MARITAL), cols=vars(STATE)) #this command cares about your data, which is not the same with boxplot & jitter
 
+  
+
+
+#Continues variables ----
+ggplot(demographics, aes(x=INCOME, y=log(HEALTHCARE_EXPENSES))) +
+  geom_point(color="darkgreen", size=0.5, alpha=.1) + #alpha= transparency
+  geom_smooth(fill="blue", color="darkred", alpha=.2)+
+  geom_smooth(method = "lm", se=FALSE)+
+  geom_abline(slope = 1, intercept = 0, color="darkorange", linetype = 2)+
+  theme_classic()
+
+ggplot(mtcars, aes(x=wt, y=mpg)) +
+  geom_point(color="darkgreen", size=0.5, alpha=1) + #alpha= transparency
+  geom_smooth(fill="blue", color="darkred", alpha=.2)+
+  geom_smooth(method = "lm", se=FALSE)+
+  geom_abline(slope = 1, intercept = 0, color="darkorange", linetype = 2)+
+  theme_classic()
+
+ggplot(demographics, aes(x=HEALTHCARE_COVERAGE, y=log(HEALTHCARE_EXPENSES))) +
+  geom_point(color="darkgreen", size=0.5, alpha=.1) + #alpha= transparency
+  geom_smooth(fill="blue", color="darkred", alpha=.2)+
+  geom_smooth(method = "lm", se=FALSE)+
+  geom_abline(slope = 1, intercept = 0, color="darkorange", linetype = 2)+
+  theme_classic()
+
+#Heat Maps ----
+#See library on top
+superheat(mtcars, scale=TRUE, pretty.order.rows = TRUE)
+
+
+arrange(mtcars,desc(mpg)) %>% superheat(scale=TRUE)
+
+cor(mtcars,use = "pairwise.complete.obs") %>% superheat(scale=FALSE)
+cor(mtcars,use = "pairwise.complete.obs") %>% abs() %>% superheat(scale=FALSE)
