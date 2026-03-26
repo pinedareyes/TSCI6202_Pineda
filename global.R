@@ -5,6 +5,9 @@ library(survminer)
 library(ggsurvfit)
 library(jskm)
 library(superheat) #heatmap package
+library(sf)
+library(tigris)
+library(tmap)
 
 options(datatable.na.strings=c('NULL',''));
 demographics <- import("output/csv/patients.csv") %>% mutate(BIRTHDATE=as.Date(BIRTHDATE), DEATHDATE=as.Date(DEATHDATE), 
@@ -150,3 +153,5 @@ arrange(mtcars,desc(mpg)) %>% superheat(scale=TRUE)
 
 cor(mtcars,use = "pairwise.complete.obs") %>% superheat(scale=FALSE)
 cor(mtcars,use = "pairwise.complete.obs") %>% abs() %>% superheat(scale=FALSE)
+
+
