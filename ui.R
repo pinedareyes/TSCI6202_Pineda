@@ -25,9 +25,18 @@ fluidPage(
                         value = 30)
         ),
 
-        # Show a plot of the generated distribution
+        # Main Panel ----
+        # 4 minus after a comment will create a outline header
         mainPanel(
-            plotOutput("distPlot")
+            tabsetPanel(id="main_panel", 
+                        tabPanel(title="Overview", value="overview_tab", "TSCI 6202 Class activities performed during Spring 2026"),
+                        tabPanel(title="Survival", value="survival_tab", 
+                                 plotOutput("SurvivalPlot1")
+                                 ),
+                        tabPanel(title="Relationships", value="relationships_tab"),
+                        tabPanel(title="Map", value="map_tab"),
+                        tabPanel(title="Debug", value="debug_tab")
+                        )
         )
     )
 )

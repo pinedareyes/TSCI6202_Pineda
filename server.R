@@ -7,25 +7,17 @@
 #    https://shiny.posit.co/
 #
 ## USE JUST FOR DATA MANIPULATION (Web/dashboard)
-library(shiny)
-library(survminer)
-library(ggsurvfit)
-library(jskm)
-
 # Define server logic required to draw a histogram
 function(input, output, session) {
-
-    output$distPlot <- renderPlot({
-
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-
-    })
-
+output$SurvivalPlot1<-renderPlot(
+  survfit2(survival~STATE, demographics) %>%
+    ggsurvfit() + ylab("Fraction Alive") +
+    xlab("Years Since Birth") +
+    scale_color_manual(values =c('red', 'darkgreen')) +
+    add_censor_mark() +
+    add_confidence_interval() +
+    add_quantile() +
+    add_risktable()
+  )
 }
+#Assignment for next week: using the same pattern we established for survival, put your 'favorite' boxplot into the Relationships tab.Extra challenge: create multiple plots, one after the other, in the same tab.
