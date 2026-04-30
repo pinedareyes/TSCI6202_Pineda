@@ -20,3 +20,5 @@ survivalmodel <-survfit(survival~STATE, demographics)
 fit<- survfit(Surv(timetoevent,event=censor)~STATE, data=demographics)
 
 lungfit<- surv_fit(Surv(time, status)~sex, data=survival::lung)
+
+source("GeoDATA.R")

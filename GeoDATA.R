@@ -4,6 +4,7 @@ library(tigris)     # Downloads US Census shapefiles directly (no manual unzippi
 library(dplyr)      # Data manipulation
 library(ggplot2)    # We use the same ggplot2 grammar for maps via geom_sf()
 library(rio)        # For importing CSVs
+library(tidygeocoder)
 texascounties <- counties(state = "TX", cb = TRUE)
 ggplot(data = texascounties) + 
   geom_sf() #this will create the map
@@ -42,10 +43,11 @@ ggplot(data=FQHC_C2)+
   geom_sf(data=FQHC_SF, color="pink", size=1.5, alpha=0.3)+
   geom_sf(data=shape_file_street_address, color="blue")
 
-geom_sf(Data=shapefile_addresses, color='green')
+geom_sf(data=shape_file_street_address, color='green')
 #Interactive Mapping
 tmap_mode("view")
 tm_shape(FQHC_C2)+
-  tm_polygons(fill="clinic_count_raw")+
+  tm_polygons(fill="clinic_count")+
   tm_shape(shape_file_street_address)+
   tm_dots(fill="darkgreen", fill_alpha=0.5, size=0.2)
+

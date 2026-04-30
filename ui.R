@@ -7,6 +7,7 @@
 #    https://shiny.posit.co/
 #
 
+
 library(shiny)
 
 # Define UI for application that draws a histogram
@@ -33,8 +34,10 @@ fluidPage(
                         tabPanel(title="Survival", value="survival_tab", 
                                  plotOutput("SurvivalPlot1")
                                  ),
-                        tabPanel(title="Relationships", value="relationships_tab"),
-                        tabPanel(title="Map", value="map_tab"),
+                        tabPanel(title="Relationships", value="relationships_tab", 
+                                 plotOutput("RelationshipPlot1")),
+                        tabPanel(title="Map", value="map_tab",
+                                 tmapOutput("Geomap1")),
                         tabPanel(title="Debug", value="debug_tab")
                         )
         )
