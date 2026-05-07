@@ -51,3 +51,8 @@ tm_shape(FQHC_C2)+
   tm_shape(shape_file_street_address)+
   tm_dots(fill="darkgreen", fill_alpha=0.5, size=0.2)
 
+save(
+  FQHC_C2,
+  shape_file_street_address,
+  file = 'geodata.RData'
+)

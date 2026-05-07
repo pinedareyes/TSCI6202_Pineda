@@ -40,7 +40,26 @@ function(input, output, session) {
         tm_shape(shape_file_street_address)+
         tm_dots(fill="darkgreen", fill_alpha=0.5, size=0.2)}
   )
-}
+  # Per-Session App Data ----
+  # global.R creates the ordinary objects.
+  # server.R copies them into reactiveValues so later filters/widgets
+  # can update the app's working data without changing the original objects.
+  
+  app_data <- reactiveValues(
+    demographics = demographics,
+    survivalmodel = survivalmodel
+  )
+  
+  # Debug Button ----
+  # This only matters if the optional Debug tab/button exists in ui.R.
+  observeEvent(input$debug, {
+    browser()
+  })
+  
+  
+  
+  
+  }
 
 
 #Assignment for next week: using the same pattern we established for survival, put your 'favorite' boxplot into the Relationships tab.Extra challenge: create multiple plots, one after the other, in the same tab.
